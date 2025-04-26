@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("https://s3-backend-29sp.onrender.com/expenses", { withCredentials: true })
+      .get("https://s3-backend-29sp.onrender.com/expenses/", { withCredentials: true })
       .then((response) => {
         const data = response.data;
         const currentMonth = new Date().getMonth() + 1;
@@ -63,7 +63,7 @@ const Dashboard = () => {
 }, []); 
 
   useEffect(()=> {
-    axios.get("https://s3-backend-29sp.onrender.com/rent", { withCredentials: true})
+    axios.get("https://s3-backend-29sp.onrender.com/rent/", { withCredentials: true})
     .then((response) => {
       const data = response.data
       let totalRent = 0
@@ -82,7 +82,7 @@ const Dashboard = () => {
 
 useEffect(() => {
   axios
-    .get("https://s3-backend-29sp.onrender.com/tenants", { withCredentials: true })
+    .get("https://s3-backend-29sp.onrender.com/tenants/", { withCredentials: true })
     .then((response) => {
       const occupiedInmates = response.data.filter((tenant) => tenant.status.toLowerCase() === "occupied");
       setInmatesCount(occupiedInmates.length);
@@ -93,7 +93,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get("https://s3-backend-29sp.onrender.com/rooms", { withCredentials: true }) // Replace with actual API endpoint
+      .get("https://s3-backend-29sp.onrender.com/rooms/", { withCredentials: true }) // Replace with actual API endpoint
       .then((response) => {
         const data = response.data;
         setRooms(data);
