@@ -101,14 +101,16 @@ useEffect(() => {
         // Calculate available beds
         let totalBeds = 0;
         let occupiedBeds = 0;
+        let bookedBeds = 0;
         let bedInfo = {};
 
         data.forEach((room) => {
           totalBeds += room.total_beds;
           occupiedBeds += room.occupied_count;
+          bookedBeds += room.booked;
 
           const key = `${room.capacity} in 1 ${room.room_type} Room`;
-          const availableBeds = room.total_beds - room.occupied_count;
+          const availableBeds = room.total_beds - room.occupied_count - room.booked;
 
           if (availableBeds > 0) {
             if (bedInfo[key]) {
@@ -120,7 +122,7 @@ useEffect(() => {
         });
 
         setTotalCapacity(totalBeds);
-        setAvailableBeds(totalBeds - occupiedBeds);
+        setAvailableBeds(totalBeds - occupiedBeds - bookedBeds);
         setBookedRooms(data.filter((room) => room.booked).length);
         setBedDetails(Object.entries(bedInfo).map(([type, count]) => ({ type, count })));
       })
